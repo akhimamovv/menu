@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хуо Мы Ди - Меню</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --border: #bdc3c7;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffaf46 0%, #764ba2 50%);
+            min-height: 100vh;
+            padding: 15px;
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dish-info {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dish-name {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .dish-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-icon {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .drinks-section {
+            background: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .drinks-section h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .drinks-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .drinks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .drink-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--light);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+        }
+
+        .drink-item:hover {
+            background: #e0e0e0;
+            transform: translateX(5px);
+        }
+
+        .drink-name {
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drink-icon {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .drink-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .special-badge {
+            position: absolute;
+            top: 13px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .card-header {
+            position: relative;
+        }
+
+        /* Адаптивность для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .dish-image {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 500px) {
+            .container {
+                max-width: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">Хуо Мы Ди</h1>
+            <p class="subtitle">Искусство китайской кухни</p>
+        </header>
+
+        <div class="menu-grid">
+            <!-- Карточка блюда 1 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/ChatGPT Image 28 нояб. 2025 г., 04_59_00.png" alt="Пельмени с креветками" class="dish-image">
+                    <span class="special-badge">Хит</span>
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Хуо Мы Ди</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i>Кур-ый 3000 тг</p>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i>Гов-ый 3500 тг</p>
+                </div>
+            </div>
+
+            <!-- Карточка блюда 2 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/128e7ed0-a456-11f0-8481-be6ddd4523a5_9376f93aff1197c7c19f51eead433145.avif" alt="Утка по-пекински" class="dish-image">
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Хуншо-мян</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i> 2000 тг</p>
+                </div>
+            </div>
+
+            <!-- Карточка блюда 3 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/1de80481-2c86-4070-853b-71bcff8a8167.jpg" alt="Курица кунг-пао" class="dish-image">
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Ган-фан</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i> 2300 тг</p>
+                </div>
+            </div>
+
+            <!-- Карточка блюда 4 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/a23f5e5d-1b67-44d7-95ec-3df94593df72.jpeg" alt="Лапша с овощами" class="dish-image">
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Нюжу-мян</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i> 2000 тг</p>
+                </div>
+            </div>
+
+            <!-- Карточка блюда 5 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/caption.jpg" alt="Суп хото" class="dish-image">
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Дощо-мян</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i> 2000 тг</p>
+                </div>
+            </div>
+
+            <!-- Карточка блюда 6 -->
+            <div class="dish-card">
+                <div class="card-header">
+                    <img src="./photo/Dapandzhi-2.jpg" alt="Жареные пельмени" class="dish-image">
+                    <span class="special-badge">Новинка</span>
+                </div>
+                <div class="dish-info">
+                    <h3 class="dish-name">Дапанджи</h3>
+                    <p class="dish-price"><i class="fas fa-tag price-icon"></i>3-4чел 5000 тг</p>
+                     <p class="dish-price"><i class="fas fa-tag price-icon"></i>5-6чел 8000 тг</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="drinks-section">
+            <h2>Напитки</h2>
+            <div class="drinks-list">
+                <div class="drink-item">
+                    <div class="drink-name">
+                        <i class="fas fa-wine-bottle drink-icon"></i>
+                        Литровый
+                    </div>
+                    <p class="drink-price">800 тг</p>
+                </div>
+                <div class="drink-item">
+                    <div class="drink-name">
+                        <i class="fas fa-glass-whiskey drink-icon"></i>
+                        Китайский напиток
+                    </div>
+                    <p class="drink-price">700 тг</p>
+                </div>
+                <div class="drink-item">
+                    <div class="drink-name">
+                        <i class="fas fa-bolt drink-icon"></i>
+                        Редбул китайский
+                    </div>
+                    <p class="drink-price">100 тг</p>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</body>
+</html>
